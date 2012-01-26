@@ -1,9 +1,14 @@
 package com.h1723.org.voodoochestplugin;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
-import org.bukkit.plugin.PluginDescriptionFile;
+
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.event.Listener;
+
 
 public class VoodooChestPlugin extends JavaPlugin {
 
@@ -13,15 +18,19 @@ public class VoodooChestPlugin extends JavaPlugin {
 			PluginDescriptionFile pdf = this.getDescription();
 			
 			log( "Enabled" );
-			log( "Version: " + pdf.getVersion() );
-	
-		}
+			log( "  Version: " + pdf.getVersion() );
+			
+			
+			List<Listener> listeners = new ArrayList<Listener>();
+			listeners.add( new SandTransformer( this ) );
+			listeners.add( new ChestInteraction( this ) );
+			}
 		
 		public void onDisable() {
 			log( "Disabled" );
 		}
 		
-		private void log( String message ) {
+		public void log( String message ) {
 			PluginDescriptionFile pdf = this.getDescription();
 			String name = pdf.getName();
 			
