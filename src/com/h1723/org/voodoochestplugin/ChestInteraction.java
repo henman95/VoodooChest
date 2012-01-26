@@ -21,7 +21,7 @@ public class ChestInteraction extends VoodooListener {
 		Action action = event.getAction();
 		
 		if( action == Action.RIGHT_CLICK_BLOCK & block.getType() == Material.CHEST ) {
-			log( "  Checking Chest Inventory" );
+			log( "Checking Chest Inventory" );
 			
 			Chest chest = (Chest)block.getState();
 			Inventory inventory = chest.getInventory();
@@ -53,10 +53,14 @@ public class ChestInteraction extends VoodooListener {
 		int dCount = sCount / ratio;
 		int rCount = sCount - dCount * ratio;
 		
-		inventory.remove( source );
-
-		addMaterial( inventory, destination, dCount );
-		addMaterial( inventory, source, rCount );
+		if( dCount > 0 ) {
+			log( " Converting - " + (dCount*ratio) + " of " + source + " into " + dCount + " " + destination );
+			
+			inventory.remove( source );
+	
+			addMaterial( inventory, destination, dCount );
+			addMaterial( inventory, source, rCount );
+		}
 	}
 	
 	private void addMaterial( Inventory inventory, Material material, int amount ) {
