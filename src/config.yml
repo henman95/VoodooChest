@@ -1,0 +1,32 @@
+area_top:
+- none
+- none
+- none
+- none
+- none
+- none
+- none
+- none
+- none
+
+area_middle:
+- CHEST
+- none
+- TORCH
+- none
+- TORCH
+- none
+- TORCH
+- none
+- TORCH
+
+area_bottom:
+- LOG
+- COBBLESTONE
+- LOG
+- COBBLESTONE
+- LOG
+- COBBLESTONE
+- LOG
+- COBBLESTONE
+- LOG

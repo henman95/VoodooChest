@@ -22,8 +22,11 @@ public class VoodooChestPlugin extends JavaPlugin {
 			
 			
 			List<Listener> listeners = new ArrayList<Listener>();
-			listeners.add( new SandTransformer( this ) );
-			listeners.add( new ChestInteraction( this ) );
+			//listeners.add( new SandTransformer( this ) );
+			listeners.add( new PlayerInteraction( this ) );
+			
+			this.getConfig().options().copyDefaults( true );
+			saveConfig();
 			}
 		
 		public void onDisable() {
