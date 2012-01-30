@@ -1,14 +1,17 @@
 package com.h1723.org.voodoochestplugin;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.json.simple.ItemList;
 
 public class VoodooChest extends VoodooBase {
 	Chest chest;
@@ -50,17 +53,57 @@ public class VoodooChest extends VoodooBase {
 	}
 	
 	public VoodooRitual getRitual() {
+		HashMap<Material, Integer> itemList = new HashMap<Material,Integer>();
+		
 		VoodooRitual ritual = new VoodooRitual();
 		Inventory inventory = chest.getInventory();
 		
 		log( "---Voodoo Analysis---" );
 		
-		ritual.setType( VoodooRitual.Type.CONVERSION );
+		itemList = getMaterialCount( inventory );
+
+		log( "Item lists" ); 
+		for( Material material: itemList.keySet() ) { 
+			log( " *" + material + ":" + itemList.get( material ) );
+		}
+
+		ritual.setType( VoodooRitual.Type.NONE );
 		
-		if( inventory.contains( Material.SULPHUR) ) 
-			ritual.setType( VoodooRitual.Type.THUNDER );
+		if( itemList.keySet().size() >= 1 ) {
+			ritual.setType( VoodooRitual.Type.ANGER );
+		}
+		
+		if( itemList.keySet().size() == 1) {
+			if( itemList.containsKey( Material.LOG) ) { 
+				if( itemList.get( Material.LOG) == 4 )
+					ritual.setType( VoodooRitual.Type.CREATEWOODEQUIPMENT );
+			}
+		}
+
 
 		return ritual;
+	}
+	
+	private HashMap<Material,Integer> getMaterialCount( Inventory inventory ) {
+		HashMap<Material, Integer> itemList = new HashMap<Material,Integer>();
+		
+		for( ItemStack stack: inventory.getContents() ) {
+			int      currentCount = 0;
+			
+			if(stack==null )
+				continue;
+
+			log( stack.toString() );
+			Material material     = stack.getType();
+			
+			if( itemList.containsKey( material ) )
+				currentCount = itemList.get( material );
+			currentCount += stack.getAmount();
+			
+			itemList.put( material, currentCount );
+		}
+		
+		return itemList;
 	}
 	
 	public boolean isVoodooChest() {
@@ -86,6 +129,10 @@ public class VoodooChest extends VoodooBase {
 		return isOK;
 	}
 	
+	public Location getLocation() {
+		return chest.getBlock().getLocation();
+	}
+	
 	public void convertMaterials( Material source, Material destination, int ratio ) {
 		Inventory inventory = chest.getInventory();
 		
@@ -107,6 +154,13 @@ public class VoodooChest extends VoodooBase {
 			addMaterial( source, rCount );
 		}
 	}
+	
+	public void emptyMaterials() {
+		Inventory inventory = chest.getInventory();
+		
+		inventory.clear();
+	}
+	
 	public void removeMaterial( Material material ) {
 		Inventory inventory = chest.getInventory();
 		

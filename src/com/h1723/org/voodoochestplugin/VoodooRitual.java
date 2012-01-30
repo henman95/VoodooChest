@@ -6,7 +6,9 @@ public class VoodooRitual {
 	public enum Type {
 		NONE,
 		CONVERSION,
-		THUNDER
+		THUNDER,
+		CREATEWOODEQUIPMENT,
+		ANGER
 	}
 	
 	Type ritualType = Type.NONE;
@@ -47,11 +49,12 @@ public class VoodooRitual {
 	}
 	
 	public String toString() {
-		String output = "";
+		String output = "HUH";
 		
-		if( ritualType == Type.NONE ) output += "None";
-		if( ritualType == Type.CONVERSION ) output += "Conversion";
-		if( ritualType == Type.THUNDER ) output += "Thunder Maker";
+		if( ritualType == Type.NONE ) output = "None";
+		if( ritualType == Type.CONVERSION ) output = "Conversion";
+		if( ritualType == Type.THUNDER ) output = "Thunder Maker";
+		if( ritualType == Type.CREATEWOODEQUIPMENT ) output = "Wood Equipment";
 		
 		return output;
 	}
