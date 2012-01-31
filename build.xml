@@ -1,5 +1,5 @@
-<project name="VoodooChest" default="deploy" basedir=".">
-	<property name="pluginname" value="VoodooChest"/>
+<project name="Voodoo" default="deploy" basedir=".">
+	<property name="pluginname" value="Voodoo"/>
 	<property name="bukkit.jar" location="../../Server/bukkit.jar"/>
 	<property name="plugins" location="../../Server/plugins/"/>
 
