@@ -24,11 +24,12 @@ public class BoneTrigger extends BaseTrigger {
 		if( action == Action.LEFT_CLICK_BLOCK )
 			if( block.getType() == Material.LOG )
 				if( player.getItemInHand().getType()== Material.BONE ) {
-					log( "Got a bone " );
-					event.setCancelled( true );
+					TriggerEvent tevent = new TriggerEvent();
 					
-					log( 3, "Setting " + player.getName() + " on fire." );
-					player.setFireTicks( 30 );
+					tevent.setPlayerInteractEvent( event );
+					tevent.setTarget( event.getClickedBlock() );
+					
+					trigger( tevent );
 				}
 			
 	}

@@ -9,4 +9,6 @@ public interface VoodooEngine {
 	public void clearDebug();
 	
 	public void initialize();
+	
+	public void onTrigger( TriggerEvent event );
 }

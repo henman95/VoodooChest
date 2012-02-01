@@ -13,7 +13,7 @@ public class VoodooPlugin extends JavaPlugin {
 	public void onEnable() {
 		// Create Logger
 		logger = new VoodooLogger( this );
-		logger.setLevel( 3 );
+		logger.setLevel( 5 );
 		
 		log( "Enabled" );
 		log( "  Version: " + this.getDescription().getVersion() );

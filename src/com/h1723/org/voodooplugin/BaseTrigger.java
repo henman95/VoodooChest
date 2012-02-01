@@ -27,4 +27,10 @@ public abstract class BaseTrigger implements VoodooTrigger {
 		if( logger != null ) 
 			logger.log( level, text );
 	}
+	
+	protected void trigger( TriggerEvent event) {
+		event.setName( name );
+		
+		engine.onTrigger( event );
+	}
 }
